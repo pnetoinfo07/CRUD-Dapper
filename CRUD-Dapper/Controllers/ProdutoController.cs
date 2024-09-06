@@ -11,16 +11,28 @@ namespace CRUD_Dapper.Controllers
         {
             _repository = new ProdutoRepository(configuration);
         }
-        [HttpPost("Adicionar-dapper")]
-        public void Adicionar(Produto p)
+        [HttpGet("Listar-Produtos")]
+        public List<Produto> ListarProdutos()
         {
-         _repository.Adicionar(p);
+         return _repository.ListarProdutos();
         }
 
-        [HttpPost("Adicionar-dapper-cntrib")]
+        [HttpPost("Adicionar-Produtos")]
         public void AdicionarProduto(Produto p)
         {
             _repository.AdicionarContrib(p);
+        }
+
+        [HttpPut("Editar-Produtos")]
+        public void EditarProduto(Produto p)
+        {
+            _repository.Editar(p);
+        }
+
+        [HttpDelete("Remover-Produtos")]
+        public void RemoverProduto(int id)
+        {
+            _repository.Delete(id);
         }
 
     }

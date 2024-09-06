@@ -11,19 +11,30 @@ namespace CRUD_Dapper
         {
             _connectionString = configuration.GetConnectionString("DefaultConnection");
         }
-
-        public void Adicionar(Produto p)
-        {
-            using var connection = new SQLiteConnection(_connectionString);
-            string commandInsert = @"INSERT INTO Produtos (Nome,Preco) 
-                                     VALUES (@Nome,@Preco)";
-            connection.Execute(commandInsert, p);
-        }
-
         public void AdicionarContrib(Produto p)
         {
             using var connection = new SQLiteConnection(_connectionString);
             connection.Insert<Produto>(p);
+        }
+        public List<Produto> ListarProdutos()
+        {
+            using var connection = new SQLiteConnection(_connectionString);
+            return connection.GetAll<Produto>().ToList();
+        }
+        public Produto BuscarProduto(int id)
+        {
+            using var connection = new SQLiteConnection(_connectionString);
+            return connection.Get<Produto>(id);
+        }
+        public void Editar(Produto p)
+        {
+            using var connection = new SQLiteConnection(_connectionString);
+            connection.Update<Produto>(p);
+        }
+        public void Delete(int id) {
+            using var connection = new SQLiteConnection(_connectionString);
+            Produto novoProduto = BuscarProduto(id);
+            connection.Delete<Produto>(novoProduto);
         }
     }
 }
