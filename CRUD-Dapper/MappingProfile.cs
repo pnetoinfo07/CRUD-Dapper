@@ -7,7 +7,7 @@ namespace CRUD_Dapper
     {
         public MappingProfile()
         {
-            CreateMap<CreateProdutoDTO, Produto>();
+            CreateMap<CreateProdutoDTO, Produto>().ReverseMap();
         }
     }
 }

@@ -11,7 +11,6 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 InicializadorBd.Inicializar();
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
